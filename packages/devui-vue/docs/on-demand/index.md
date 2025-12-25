@@ -51,3 +51,26 @@ createApp(App).use(Button).mount('#app');
   <d-button>确定</d-button>
 </template>
 ```
+
+### 特殊说明：Echarts 组件
+
+`Echarts` 组件由于依赖关系的原因，**不会包含在主入口文件中**，只能通过独立导入的方式使用：
+
+```ts
+// 导入 Echarts 组件
+import DChart from 'vue-devui/echarts';
+import 'vue-devui/echarts/style.css';
+
+createApp(App).use(DChart).mount('#app');
+```
+
+在`src/App.vue`文件中使用：
+
+```vue
+<template>
+  <!-- 使用 Echarts 组件 -->
+  <d-chart :option="chartOption" style="width: 100%; height: 400px"></d-chart>
+</template>
+```
+
+**注意**：`Echarts` 组件不会在全量导入时自动注册，必须单独导入使用。

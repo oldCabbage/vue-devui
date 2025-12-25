@@ -24,6 +24,7 @@ const {
   VITEPRESS_SIDEBAR_FILE_NAME,
   VITEPRESS_SIDEBAR_FILE_EN,
   VITEPRESS_SIDEBAR_FILE_NAME_EN,
+  EXCLUDE_FROM_MAIN,
   isProd
 } = require('../shared/constant');
 const { isEmpty, kebabCase } = require('lodash');
@@ -135,7 +136,14 @@ async function createComponent(params = {}) {
 
 async function createVueDevui(params, { ignoreParseError, env }) {
   const fileInfo = resolveDirFilesInfo(DEVUI_DIR, VUE_DEVUI_IGNORE_DIRS)
-    .filter(({ name }) => (env === 'prod' && isReadyToRelease(kebabCase(name))) || !env || env === 'dev');
+    .filter(({ name }) => {
+      const kebabName = kebabCase(name);
+      // 排除列表中的组件不包含在主入口中（这些组件只能通过独立导入使用）
+      if (EXCLUDE_FROM_MAIN.includes(kebabName)) {
+        return false;
+      }
+      return (env === 'prod' && isReadyToRelease(kebabName)) || !env || env === 'dev';
+    });
 
   const exportModules = [];
 

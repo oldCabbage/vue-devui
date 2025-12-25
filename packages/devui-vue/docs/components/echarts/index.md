@@ -2,6 +2,26 @@
 
 devui主题风格的Echarts图表, 封装了devui主题和基础的相应事件
 
+### 导入方式
+
+**注意**：`Echarts` 组件不会包含在主入口文件中，必须单独导入使用：
+
+```ts
+// 导入 Echarts 组件
+import DChart from 'vue-devui/echarts';
+import 'vue-devui/echarts/style.css';
+
+// 注册组件
+createApp(App).use(DChart).mount('#app');
+```
+
+或者直接使用组件：
+
+```ts
+import { DChart } from 'vue-devui/echarts';
+import 'vue-devui/echarts/style.css';
+```
+
 ### 用法示例 -- 折线图
 
 :::demo

@@ -116,3 +116,7 @@ exports.WHITE_LIST_READY_COMPONENTS = [
   'select', 'tooltip', 'table', 'tabs', 'form',
   'dropdown', 'drawer', 'date-picker-pro', 'input-number', 'tree'
 ];
+
+// 从主入口文件中排除的组件列表（这些组件只能通过独立导入使用）
+// 例如：echarts 因为 sideEffects 问题，需要从主入口排除，只能按需导入
+exports.EXCLUDE_FROM_MAIN = ['echarts'];
